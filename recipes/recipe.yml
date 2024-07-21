@@ -10,10 +10,17 @@ image-version: stable
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
+  - type: signing
+
   - type: files
     files:
       - usr: /usr
       - etc: /etc
+
+  - type: fonts
+    fonts:
+      nerd-fonts:
+        - FiraCode
 
   # Virtualization
   - type: rpm-ostree
@@ -48,6 +55,4 @@ modules:
         - docker.service
         - containerd.service
         - coolercontrold.service
-
-  - type: signing # this sets up the proper policy & signing files for signed images to work fully
 
