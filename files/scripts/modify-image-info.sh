@@ -5,6 +5,8 @@
 # builds actually ran successfully without any errors!
 set -oue pipefail
 
-# Your code goes here.
-echo 'This is an example shell script'
-echo 'Scripts here will run during build if specified in recipe.yml'
+# Edit image-info.json
+# Change bazzite to azurite
+sed -i 's/bazzite/azurite/' /usr/share/ublue-os/image-info.json
+# Change vendor to asen23
+sed -i 's/ublue-os/asen23/' /usr/share/ublue-os/image-info.json
