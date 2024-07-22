@@ -5,6 +5,7 @@ description: Bazzite with my personal changes.
 
 alt-tags:
   - stable
+  - latest
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/bazzite
