@@ -6,7 +6,7 @@ on:
   push:
     paths-ignore:
       - "**.md"
-      - ".vscode"
+      - ".vscode/**"
 
   pull_request:
   workflow_dispatch: # allow manually triggering builds
