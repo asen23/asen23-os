@@ -26,6 +26,7 @@ modules:
       - "echo \"\\\"Rootful Distrobox\\\" = \\\"/usr/bin/distrobox upgrade --root --all\\\"\" >> /usr/etc/ublue-os/topgrade.toml" # Add rootful distrobox to topgrade
     scripts:
       - modify-image-info.sh
+      - modify-fastfetch.sh
 
   - type: fonts
     fonts:
