@@ -25,14 +25,9 @@ jobs:
           # !! Add your recipes here
           - recipe.yml
     steps:
-      - name: Define env.SHA_HEAD_SHORT
-        run: |
-          echo "SHA_HEAD_SHORT=${GITHUB_SHA::7}" >> $GITHUB_ENV
       # the build is fully handled by the reusable github action
       - name: Build Custom Image
         uses: blue-build/github-action@v1.6
-        env:
-          SHA_HEAD_SHORT: ${{ env.SHA_HEAD_SHORT }}
         with:
           recipe: ${{ matrix.recipe }}
           cosign_private_key: ${{ secrets.SIGNING_SECRET }}
