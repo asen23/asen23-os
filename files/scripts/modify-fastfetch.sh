@@ -5,7 +5,7 @@
 # builds actually ran successfully without any errors!
 set -oue pipefail
 
-# Edit image-info.json
+# Edit fastfetch.jsonc
 # Change logo type
 yq -i -o=json -I=4 '.logo.type = "chafa"' /usr/share/ublue-os/bazzite/fastfetch.jsonc
 # Change logo source
