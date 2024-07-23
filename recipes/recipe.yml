@@ -27,6 +27,7 @@ modules:
     scripts:
       - modify-image-info.sh
       - modify-fastfetch.sh
+      - modify-os-release.sh
 
   - type: fonts
     fonts:
