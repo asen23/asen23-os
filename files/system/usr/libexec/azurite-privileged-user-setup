@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+# Add input group
+if ! grep -q "input" /etc/group; then
+  sudo bash -c 'grep "input" /lib/group >> /etc/group'
+fi
+
+sudo usermod -a -G input $USER
+
+# Add docker group
+if ! grep -q "docker" /etc/group; then
+  sudo bash -c 'grep "docker" /lib/group >> /etc/group'
+fi
+
+sudo usermod -a -G docker $USER

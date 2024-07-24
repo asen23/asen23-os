@@ -1,0 +1,46 @@
+#!/usr/bin/bash
+
+IMAGE_INFO="/usr/share/ublue-os/image-info.json"
+IMAGE_NAME=$(jq -r '."image-name"' < $IMAGE_INFO)
+FEDORA_VERSION=$(jq -r '."fedora-version"' < $IMAGE_INFO)
+
+# INIT
+AZURITE_CONFIG_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/azurite"
+mkdir -p "$AZURITE_CONFIG_DIR"
+
+# SCRIPT VERSION
+USER_SETUP_VER=1
+USER_SETUP_VER_FILE="$AZURITE_CONFIG_DIR/version"
+USER_SETUP_FEDORA_VER_FILE="$AZURITE_CONFIG_DIR/fedora_version"
+
+if [[ -f "$HOME/.azurite-configured" ]]; then
+  mv -f "$HOME/.azurite-configured" "$USER_SETUP_VER_FILE"
+fi
+
+if [[ -f "$HOME/.azurite-configured-fedora-version" ]]; then
+  mv -f "$HOME/.azurite-configured-fedora-version" "$USER_SETUP_FEDORA_VER_FILE"
+fi
+
+# Run script if updated
+if [[ -f $USER_SETUP_VER_FILE && -f $USER_SETUP_FEDORA_VER_FILE ]]; then
+  USER_SETUP_VER_RAN=$(cat $USER_SETUP_VER_FILE)
+  USER_SETUP_FEDORA_VER_RAN=$(cat $USER_SETUP_FEDORA_VER_FILE)
+
+  if [[ $USER_SETUP_VER = "$USER_SETUP_VER_RAN" && $FEDORA_VERSION = "$USER_SETUP_FEDORA_VER_RAN" ]]; then
+    echo "User setup v$USER_SETUP_VER has already run. Exiting..."
+    exit 0
+  fi
+fi
+
+# Handle privileged tasks
+pkexec /usr/libexec/azurite-privileged-user-setup "$USER"
+
+# Install Flatpak
+FLATPAKS="kde_flatpaks/flatpaks"
+FLATPAK_LIST="$(curl https://raw.githubusercontent.com/ublue-os/bazzite/main/installer/${FLATPAKS} | tr '\n' ' ')"
+flatpak --system -y install --or-update ${FLATPAK_LIST}
+
+# Prevent future executions
+echo "Writing state file"
+echo $USER_SETUP_VER > $USER_SETUP_VER_FILE
+echo $FEDORA_VERSION > $USER_SETUP_FEDORA_VER_FILE

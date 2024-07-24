@@ -68,4 +68,8 @@ modules:
         - docker.service
         - containerd.service
         - coolercontrold.service
+    user:
+      enabled:
+        # Azurite Service
+        - azurite-user-setup.service
 
