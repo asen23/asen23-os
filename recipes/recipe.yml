@@ -24,6 +24,7 @@ modules:
   - type: script
     snippets:
       - "echo \"\\\"Rootful Distrobox\\\" = \\\"/usr/bin/distrobox upgrade --root --all\\\"\" >> /usr/etc/ublue-os/topgrade.toml" # Add rootful distrobox to topgrade
+      - "rm /usr/etc/profile.d/ublue-firstboot.sh" # Disable YAFTI
     scripts:
       - modify-image-info.sh
       - modify-fastfetch.sh
