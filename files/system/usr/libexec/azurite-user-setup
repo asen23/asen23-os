@@ -9,7 +9,7 @@ AZURITE_CONFIG_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/azurite"
 mkdir -p "$AZURITE_CONFIG_DIR"
 
 # SCRIPT VERSION
-USER_SETUP_VER=1
+USER_SETUP_VER=2
 USER_SETUP_VER_FILE="$AZURITE_CONFIG_DIR/version"
 USER_SETUP_FEDORA_VER_FILE="$AZURITE_CONFIG_DIR/fedora_version"
 
@@ -38,7 +38,7 @@ pkexec /usr/libexec/azurite-privileged-user-setup "$USER"
 # Install Flatpak
 FLATPAKS="kde_flatpaks/flatpaks"
 FLATPAK_LIST="$(curl https://raw.githubusercontent.com/ublue-os/bazzite/main/installer/${FLATPAKS} | tr '\n' ' ')"
-flatpak --system -y install --or-update ${FLATPAK_LIST}
+flatpak --system -y install --or-update flathub ${FLATPAK_LIST}
 
 # Prevent future executions
 echo "Writing state file"
