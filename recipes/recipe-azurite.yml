@@ -1,0 +1,37 @@
+# image will be published to ghcr.io/<user>/<name>
+name: azurite
+# description will be included in the image's metadata
+description: Bazzite with my personal changes.
+
+alt-tags:
+  - stable
+  - latest
+
+# the base image to build on top of (FROM) and the version tag to use
+base-image: ghcr.io/ublue-os/bazzite
+image-version: stable
+
+# module configuration, executed in order
+# you can include multiple instances of the same module
+modules:
+  - from-files: common-modules.yml
+
+  - type: files
+    files:
+      - source: system/azurite
+        destination: /
+
+  - type: script
+    snippets:
+      - "rm /usr/etc/profile.d/ublue-firstboot.sh" # Disable YAFTI
+    scripts:
+      - modify-image-info.sh
+      - modify-fastfetch.sh
+      - modify-os-release.sh
+
+  - type: systemd
+    user:
+      enabled:
+        # Azurite Service
+        - azurite-user-setup.service
+

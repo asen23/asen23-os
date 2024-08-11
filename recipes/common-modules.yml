@@ -1,34 +1,14 @@
-# image will be published to ghcr.io/<user>/<name>
-name: azurite
-# description will be included in the image's metadata
-description: Bazzite with my personal changes.
-
-alt-tags:
-  - stable
-  - latest
-
-# the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/bazzite
-image-version: stable
-
-# module configuration, executed in order
-# you can include multiple instances of the same module
 modules:
   - type: signing
 
   - type: files
     files:
-      - source: system
+      - source: system/common
         destination: /
 
   - type: script
     snippets:
       - "echo \"\\\"Rootful Distrobox\\\" = \\\"/usr/bin/distrobox upgrade --root --all\\\"\" >> /usr/etc/ublue-os/topgrade.toml" # Add rootful distrobox to topgrade
-      - "rm /usr/etc/profile.d/ublue-firstboot.sh" # Disable YAFTI
-    scripts:
-      - modify-image-info.sh
-      - modify-fastfetch.sh
-      - modify-os-release.sh
 
   - type: fonts
     fonts:
@@ -68,8 +48,4 @@ modules:
         - docker.service
         - containerd.service
         - coolercontrold.service
-    user:
-      enabled:
-        # Azurite Service
-        - azurite-user-setup.service
 
