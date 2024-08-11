@@ -8,7 +8,7 @@ modules:
 
   - type: script
     snippets:
-      - "echo \"\\\"Rootful Distrobox\\\" = \\\"/usr/bin/distrobox upgrade --root --all\\\"\" >> /usr/etc/ublue-os/topgrade.toml" # Add rootful distrobox to topgrade
+      - "echo \"\\\"Rootful Distrobox\\\" = \\\"/usr/bin/distrobox upgrade --root --all\\\"\" >> /etc/ublue-os/topgrade.toml" # Add rootful distrobox to topgrade
 
   - type: fonts
     fonts:
