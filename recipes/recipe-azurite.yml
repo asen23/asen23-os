@@ -23,7 +23,7 @@ modules:
 
   - type: script
     snippets:
-      - "rm /usr/etc/profile.d/ublue-firstboot.sh" # Disable YAFTI
+      - "rm /etc/profile.d/ublue-firstboot.sh" # Disable YAFTI
     scripts:
       - modify-image-info.sh
       - modify-fastfetch.sh
