@@ -6,9 +6,13 @@
 set -oue pipefail
 
 # Edit fastfetch.jsonc
+cat /usr/share/ublue-os/bazzite/fastfetch.jsonc | \
+# Handle trailing comma
+sed -z 's/,\s*}/\n}/' | \
 # Change logo type
-yq -i -o=json -I=4 '.logo.type = "chafa"' /usr/share/ublue-os/bazzite/fastfetch.jsonc
+jq '.logo.type = "chafa"' | \
 # Change logo source
-yq -i -o=json -I=4 '.logo.source = "/usr/share/asen23/logo.png"' /usr/share/ublue-os/bazzite/fastfetch.jsonc
+jq '.logo.source = "/usr/share/asen23/logo.png"' | \
 # Remove unused color param
-yq -i -o=json -I=4 'del(.logo.color)' /usr/share/ublue-os/bazzite/fastfetch.jsonc
+jq 'del(.logo.color)' > /usr/share/ublue-os/bazzite/fastfetch.jsonc
+
