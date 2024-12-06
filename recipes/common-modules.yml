@@ -16,6 +16,7 @@ modules:
     install:
       - virt-manager
       - edk2-ovmf
+      - libvirt
       - qemu
 
   # Docker
