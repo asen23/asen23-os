@@ -1,12 +1,15 @@
 # asen23-os &nbsp; [![build-ublue](https://github.com/asen23/asen23-os/actions/workflows/build.yml/badge.svg)](https://github.com/asen23/asen23-os/actions/workflows/build.yml)
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+This is my personal custom image based on Bazzite. Most of the changes are adding dx stuff like vscode, docker, and virt-manager.
 
-After setup, it is recommended you update this README to describe your custom image.
+Currently there is two image:
+ - bazzite
+ - azurite
 
+The difference between azurite and bazzite is azurite have some branding changed and have some startup script added.
 ## Installation
 
-> **Warning**  
+> **Warning**
 > [This is an experimental feature](https://www.fedoraproject.org/wiki/Changes/OstreeNativeContainerStable), try at your own discretion.
 
 To rebase an existing atomic Fedora installation to the latest build:
