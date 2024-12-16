@@ -25,9 +25,9 @@ modules:
     snippets:
       - "rm /etc/profile.d/ublue-firstboot.sh" # Disable YAFTI
     scripts:
-      - modify-image-info.sh
-      - modify-fastfetch.sh
-      - modify-os-release.sh
+      - azurite/modify-image-info.sh
+      - azurite/modify-fastfetch.sh
+      - azurite/modify-os-release.sh
 
   - type: systemd
     user:
