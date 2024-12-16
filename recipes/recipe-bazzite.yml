@@ -16,4 +16,8 @@ image-version: stable
 modules:
   - from-file: common-modules.yml
 
+  - type: script
+    scripts:
+      - bazzite/modify-image-info.sh
+
 
