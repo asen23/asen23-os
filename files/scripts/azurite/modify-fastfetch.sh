@@ -14,5 +14,7 @@ jq '.logo.type = "chafa"' | \
 # Change logo source
 jq '.logo.source = "/usr/share/asen23/logo.png"' | \
 # Remove unused color param
-jq 'del(.logo.color)' > /usr/share/ublue-os/bazzite/fastfetch.jsonc
+jq 'del(.logo.color)' | \
+# Write result
+tee /usr/share/ublue-os/image-info.json
 

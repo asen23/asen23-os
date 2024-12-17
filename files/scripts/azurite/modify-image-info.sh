@@ -12,5 +12,7 @@ jq '."image-name" = "azurite"' | \
 # Change vendor \
 jq '."image-vendor" = "asen23"' | \
 # Change image ref \
-jq '."image-ref" = "ostree-image-signed:docker://ghcr.io/asen23/azurite"' > /usr/share/ublue-os/image-info.json
+jq '."image-ref" = "ostree-image-signed:docker://ghcr.io/asen23/azurite"' | \
+# Write result
+tee /usr/share/ublue-os/image-info.json
 
