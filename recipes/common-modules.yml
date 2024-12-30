@@ -11,14 +11,6 @@ modules:
       nerd-fonts:
         - FiraCode
 
-  # Virtualization
-  - type: rpm-ostree
-    install:
-      - virt-manager
-      - edk2-ovmf
-      - libvirt
-      - qemu
-
   # Docker
   - type: rpm-ostree
     repos:
