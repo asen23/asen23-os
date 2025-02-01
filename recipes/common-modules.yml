@@ -11,6 +11,10 @@ modules:
       nerd-fonts:
         - FiraCode
 
+  - type: akmods
+    install:
+      - nct6687d
+
   # Docker
   - type: rpm-ostree
     repos:
