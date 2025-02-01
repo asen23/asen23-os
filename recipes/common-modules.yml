@@ -12,6 +12,7 @@ modules:
         - FiraCode
 
   - type: akmods
+    base: bazzite
     install:
       - nct6687d
 
