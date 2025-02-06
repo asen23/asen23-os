@@ -31,6 +31,27 @@ jobs:
           - recipe-bazzite.yml
     steps:
       # the build is fully handled by the reusable github action
+      - uses: actions/checkout@v4
+      - name: Get Kernel Version
+        steps:
+          - name: Install skopeo
+            run: |
+              sudo apt-get update
+              sudo apt-get install -y skopeo
+          - name: Inspect image and extract label
+            id: inspect
+            run: |
+              IMAGE=${{ github.event.inputs.image }}
+              LABEL_VALUE=$(skopeo inspect $IMAGE | jq -r '.Labels["ostree.linux"]')
+              echo "kernel_version=$LABEL_VALUE" >> $GITHUB_ENV
+          - name: Display extracted label
+            run: |
+              echo "Extracted ostree.linux label: $kernel_version"
+      - name: Change Akmods Tag
+        steps:
+          - name: Modify file with extracted label
+            run: |
+              sed -i "s/KERNEL_VERSION/$kernel_version/g" ./recipes/akmods-modules.yml
       - name: Build Custom Image
         uses: blue-build/github-action@v1.8
         with:
@@ -42,3 +63,4 @@ jobs:
           # enabled by default, disable if your image is small and you want faster builds
           maximize_build_space: true
           rechunk: true
+          skip_checkout: true

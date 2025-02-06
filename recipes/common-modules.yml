@@ -6,15 +6,12 @@ modules:
       - source: system/common
         destination: /
 
+  - from-file: akmods-modules.yml
+
   - type: fonts
     fonts:
       nerd-fonts:
         - FiraCode
-
-  - type: akmods
-    base: bazzite
-    install:
-      - nct6687d
 
   # Docker
   - type: rpm-ostree

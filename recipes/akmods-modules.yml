@@ -1,0 +1,10 @@
+modules:
+  - type: copy
+    from: ghcr.io/ublue-os/akmods-extra:KERNEL_VERSION
+    src: /rpms/
+    dest: /tmp/rpms
+
+  - type: containerfile
+    snippets:
+      - RUN find /tmp/rpms
+      - RUN rpm-ostree install /tmp/rpms/kmods/*nct6687*.rpm
