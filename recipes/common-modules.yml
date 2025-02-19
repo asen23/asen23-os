@@ -33,6 +33,11 @@ modules:
     install:
       - code
 
+  # Virtualization
+  - type: rpm-ostree
+    install:
+      - virt-manager
+
   # Cooler Control
   - type: rpm-ostree
     repos:
