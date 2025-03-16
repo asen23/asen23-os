@@ -11,6 +11,7 @@
     "Floorp",
     "gpgcheck",
     "gpgkey",
+    "kmods",
     "libvirtd",
     "liquidctl",
     "ostree",
