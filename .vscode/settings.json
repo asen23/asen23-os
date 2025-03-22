@@ -12,6 +12,7 @@
     "gpgcheck",
     "gpgkey",
     "kmods",
+    "lact",
     "libvirtd",
     "liquidctl",
     "ostree",
