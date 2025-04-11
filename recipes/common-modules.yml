@@ -44,11 +44,6 @@ modules:
       - coolercontrol
       - liquidctl
 
-  # Overclocking
-  - type: rpm-ostree
-    install:
-      - lact
-
   # Misc
   - type: rpm-ostree
     install:
