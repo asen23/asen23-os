@@ -59,6 +59,7 @@ modules:
     install:
       packages:
         - zsh
+        - merkuro
 
   - type: systemd
     system:
