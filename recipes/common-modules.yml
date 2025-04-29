@@ -60,6 +60,7 @@ modules:
       packages:
         - zsh
         - merkuro
+        - qt6-qtlocation # required for merkuro
 
   - type: systemd
     system:
