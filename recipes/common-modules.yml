@@ -54,13 +54,19 @@ modules:
         - coolercontrol
         - liquidctl
 
+  # Merkuro
+  # - type: dnf
+  #   install:
+  #     packages:
+  #       - merkuro
+  #       - qt6-qtlocation
+  #       - kdepim-runtime
+
   # Misc
   - type: dnf
     install:
       packages:
         - zsh
-        - merkuro
-        - qt6-qtlocation # required for merkuro
 
   - type: systemd
     system:
