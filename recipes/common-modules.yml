@@ -54,13 +54,15 @@ modules:
         - coolercontrol
         - liquidctl
 
-  # Merkuro
-  # - type: dnf
-  #   install:
-  #     packages:
-  #       - merkuro
-  #       - qt6-qtlocation
-  #       - kdepim-runtime
+  # Klassy
+  - type: dnf
+    repos:
+      cleanup: true
+      files:
+        - https://download.opensuse.org/repositories/home:paul4us/Fedora_%OS_VERSION%/home:paul4us.repo
+    install:
+      packages:
+        - klassy
 
   # Misc
   - type: dnf
