@@ -31,7 +31,7 @@ jobs:
           - recipe-bazzite.yml
     steps:
       # the build is fully handled by the reusable github action
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install skopeo
         run: |
           sudo apt-get update
