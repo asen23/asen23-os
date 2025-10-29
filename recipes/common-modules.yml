@@ -69,6 +69,7 @@ modules:
     install:
       packages:
         - zsh
+        - wallpaper-engine-kde-plugin
 
   - type: systemd
     system:
