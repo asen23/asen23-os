@@ -68,7 +68,8 @@ modules:
   - type: dnf
     repos:
       cleanup: true
-      nonfree: rpmfusion
+      copr:
+        - bazzite-org/wallpaper-engine-kde-plugin
     install:
       packages:
         - zsh
