@@ -69,7 +69,7 @@ modules:
     repos:
       cleanup: true
       copr:
-        - bazzite-org/wallpaper-engine-kde-plugin
+        - jackgreiner/wallpaper-engine-kde-plugin
     install:
       packages:
         - zsh
