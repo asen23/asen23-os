@@ -66,6 +66,9 @@ modules:
 
   # Misc
   - type: dnf
+    repos:
+      cleanup: true
+      nonfree: rpmfusion
     install:
       packages:
         - zsh
