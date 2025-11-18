@@ -1,13 +1,11 @@
 name: bluebuild
 on:
-  schedule:
-    - cron: "00 06 * * 0" # build at 06:00 UTC every sunday
-                          # (20 minutes after last ublue images start building)
   push:
+    branches:
+      - main
     paths-ignore:
       - "**.md"
       - ".vscode/**"
-
   pull_request:
   workflow_dispatch: # allow manually triggering builds
 concurrency:
