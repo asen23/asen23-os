@@ -1,18 +1,17 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:best-practices"
+    "config:best-practices",
+    "default:automergeDigest"
   ],
-  "packageRules": [
+  "customManagers": [
     {
-      "matchPackageNames": [
-        "ghcr.io/ublue-os/bazzite"
-      ],
-      "groupName": "images",
-      "matchUpdateTypes": [
-        "digest"
-      ],
-      "automerge": true
+      "customType": "jsonata",
+      "fileFormat": "yaml",
+      "managerFilePatterns": ["image-versions.yaml"],
+      "matchStrings": ["images.{ \"depName\": image, \"currentValue\": tag, \"currentDigest\": digest }"],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker"
     }
   ]
 }
