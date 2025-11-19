@@ -6,10 +6,9 @@
   ],
   "customManagers": [
     {
-      "customType": "jsonata",
-      "fileFormat": "yaml",
+      "customType": "regex",
       "managerFilePatterns": ["image-versions.yaml"],
-      "matchStrings": ["images.{ \"depName\": image, \"currentValue\": tag, \"currentDigest\": digest }"],
+      "matchStrings": ["name: \\\"(?<name>[^\\\"\\\\\\s]+)\\\"\\s+image: \\\"(?<depName>[^\\\"\\\\\\s]+)\\\"\\s+tag: \\\"(?<currentValue>[^\\\"\\\\\\s]+)\\\"\\s+digest: \"(?<currentDigest>[^\\\"\\\\\\s]+)\\\""],
       "datasourceTemplate": "docker",
       "versioningTemplate": "docker"
     }
