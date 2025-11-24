@@ -9,7 +9,7 @@ alt-tags:
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/bazzite
-image-version: stable-43.20251102
+image-version: stable
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
