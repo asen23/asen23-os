@@ -2,4 +2,4 @@ images:
   - name: "bazzite"
     image: "ghcr.io/ublue-os/bazzite"
     tag: "stable"
-    digest: "sha256:6195955014538362b2eea306a7dc304a0c78ab714d1d0f777b73821fae5988e1"
+    digest: "sha256:db7a1349508d8f2a9c844c297925ba78e0d7167f5883a8b74579ea8c369f6e83"
