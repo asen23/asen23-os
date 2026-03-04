@@ -8,12 +8,6 @@ on:
       - ".vscode/**"
   pull_request:
   workflow_dispatch: # allow manually triggering builds
-    inputs:
-      clear_rechunk:
-        description: "Clear Rechunk History"
-        type: boolean
-        default: false
-        required: false
 concurrency:
   # only run one build at a time
   group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
@@ -60,6 +54,4 @@ jobs:
 
           # enabled by default, disable if your image is small and you want faster builds
           maximize_build_space: true
-          rechunk: true
           skip_checkout: true
-          rechunk_clear_plan: ${{ inputs.clear_rechunk || false }}
