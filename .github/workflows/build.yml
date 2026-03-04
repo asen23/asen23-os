@@ -62,4 +62,4 @@ jobs:
           maximize_build_space: true
           rechunk: true
           skip_checkout: true
-          rechunk_clear_plan: ${{ inputs.clear_rechunk }}
+          rechunk_clear_plan: ${{ inputs.clear_rechunk || false }}
