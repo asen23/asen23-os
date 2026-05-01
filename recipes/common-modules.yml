@@ -58,7 +58,7 @@ modules:
   - type: containerfile
     snippets:
       - RUN sed -i 's@enabled=0@enabled=1@g' /etc/yum.repos.d/terra.repo
-      - RUN sed -i 's@enabled=0@enabled=1@g' /etc/yum.repos.d/terra-extra.repo
+      - RUN sed -i 's@enabled=0@enabled=1@g' /etc/yum.repos.d/terra-extras.repo
   - type: dnf
     install:
       packages:
