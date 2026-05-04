@@ -16,7 +16,7 @@ modules:
   # Downgrade libinput
   - type: containerfile
     snippets:
-      - RUN dnf -y install libinput --releasever=43
+      - RUN dnf -y downgrade libinput --releasever=43
 
   # Docker
   - type: dnf
