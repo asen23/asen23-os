@@ -13,11 +13,6 @@ modules:
       nerd-fonts:
         - FiraCode
 
-  # Downgrade libinput
-  - type: containerfile
-    snippets:
-      - RUN dnf -y downgrade libinput --releasever=43
-
   # Docker
   - type: dnf
     repos:
