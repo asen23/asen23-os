@@ -6,7 +6,7 @@ modules:
       - source: system/common
         destination: /
 
-  # - from-file: akmods-modules.yml
+  - from-file: akmods-modules.yml
 
   - type: fonts
     fonts:
