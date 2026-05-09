@@ -56,15 +56,17 @@ modules:
         - coolercontrol
         - liquidctl
 
-  # Klassy
+  # Enable Terra for package that requires it
   - type: containerfile
     snippets:
       - RUN sed -i 's@enabled=0@enabled=1@g' /etc/yum.repos.d/terra.repo
       - RUN sed -i 's@enabled=0@enabled=1@g' /etc/yum.repos.d/terra-extras.repo
+  # Klassy
   - type: dnf
     install:
       packages:
         - klassy
+  # Terra Cleanup
   - type: containerfile
     snippets:
       - RUN sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/terra.repo
