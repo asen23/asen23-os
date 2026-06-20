@@ -6,8 +6,6 @@ modules:
       - source: system/common
         destination: /
 
-  - from-file: local-akmods-modules.yml
-
   - type: fonts
     fonts:
       nerd-fonts:
@@ -61,12 +59,17 @@ modules:
     snippets:
       - RUN sed -i 's@enabled=0@enabled=1@g' /etc/yum.repos.d/terra.repo
       - RUN sed -i 's@enabled=0@enabled=1@g' /etc/yum.repos.d/terra-extras.repo
+
   # Klassy
   - type: dnf
     install:
       packages:
         - klassy
         - akmod-nct6687d
+
+  # Akmods
+  - from-file: local-akmods-modules.yml
+
   # Terra Cleanup
   - type: containerfile
     snippets:
