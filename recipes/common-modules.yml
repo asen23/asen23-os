@@ -66,6 +66,7 @@ modules:
     install:
       packages:
         - klassy
+        - akmod-nct6687d
   # Terra Cleanup
   - type: containerfile
     snippets:
