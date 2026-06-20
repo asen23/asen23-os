@@ -6,6 +6,8 @@ modules:
       - source: system/common
         destination: /
 
+  - from-file: local-akmods-modules.yml
+
   - type: fonts
     fonts:
       nerd-fonts:

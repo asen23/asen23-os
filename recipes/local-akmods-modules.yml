@@ -1,0 +1,14 @@
+modules:
+  - type: containerfile
+    containerfiles:
+      - akmod
+
+  - type: copy
+    from: akmod
+    src: /var/cache/rpms/kmods/
+    dest: /tmp/rpms
+
+  - type: containerfile
+    snippets:
+      - RUN find /tmp/rpms
+      - RUN dnf -y install /tmp/rpms/kmods/*nct6687d*.rpm

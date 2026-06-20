@@ -1,0 +1,88 @@
+FROM quay.io/fedora/fedora:FEDORA_VERSION_PLACEHOLDER as akmod
+
+ARG KMOD_PKG=akmod-nct6687d
+ARG KMOD_NAME=nct6687d
+
+# ---------------------------------------------------------------------------
+# 1. Enable repositories
+# ---------------------------------------------------------------------------
+RUN set -euo pipefail; \
+    # Disable Cisco OpenH264 repo - not needed and often causes checksum errors
+    sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/fedora-cisco-openh264.repo; \
+    dnf install -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
+
+# ---------------------------------------------------------------------------
+# 2. Install build tools + current kernel + kernel-devel
+#    The build container has no running kernel, so we install the latest
+#    available Fedora kernel RPM from repos and build against that.
+# ---------------------------------------------------------------------------
+RUN set -euo pipefail; \
+    # allow alternatives db (needed by akmods)
+    mkdir -p /var/lib/alternatives; \
+    dnf install -y --setopt=install_weak_deps=False \
+        akmods \
+        gcc-c++; \
+    # protect tmp dir permissions - akmods is sensitive about this
+    chmod 1777 /tmp /var/tmp; \
+    mkdir -p /var/cache/rpms/kmods;
+
+RUN set -euo pipefail; \
+    ogc_image="ghcr.io/opengamingcollective/kernel-packages-fedora:KERNEL_VERSION_PLACEHOLDER"; \
+    dnf install -y --setopt=install_weak_deps=False jq skopeo golang-oras; \
+
+    # Parse manifest for kernel RPM filenames
+    manifest=$(skopeo inspect --raw "docker://${ogc_image}"); \
+    needed_prefixes="^kernel-[0-9]+\.[0-9]|^kernel-core-|^kernel-devel-|^kernel-devel-matched-|^kernel-modules-[0-9]"; \
+
+    # Fetch RPM blobs from OCI artifact
+    tmpdir=$(mktemp -d); \
+    while read -r layer; do \
+        title=$(echo "$layer" | jq -r '.annotations["org.opencontainers.image.title"]'); \
+        digest=$(echo "$layer" | jq -r '.digest'); \
+        if echo "$title" | grep -qE "$needed_prefixes"; then \
+            echo "Fetching ${title}..."; \
+            oras blob fetch "${ogc_image}@${digest}" --output "${tmpdir}/${title}"; \
+            # Layer may be a tar wrapping the RPM, or the RPM itself
+            if file "${tmpdir}/${title}" | grep -q "POSIX tar"; then \
+                tar xf "${tmpdir}/${title}" -C /; \
+            else \
+                mv "${tmpdir}/${title}" "/${title}"; \
+            fi; \
+            rm -f "${tmpdir}/${title}"; \
+        fi; \
+    done < <(echo "$manifest" | jq -c '.layers[]'); \
+    rm -rf "$tmpdir"; \
+
+    dnf install -y --setopt=install_weak_deps=False /kernel*.rpm;
+
+# ---------------------------------------------------------------------------
+# 3. Build the requested akmod
+# ---------------------------------------------------------------------------
+RUN set -euo pipefail; \
+    ARCH="$(rpm -E '%_arch')"; \
+    RELEASE="$(rpm -E '%fedora')"; \
+    # Resolve the exact kernel version that was installed in the previous step
+    KERNEL_NAME="kernel"; \
+    KERNEL="$(rpm -q ${KERNEL_NAME} --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')"; \
+    echo "Building ${KMOD_NAME} against kernel ${KERNEL}"; \
+    # Install the akmod source package
+    dnf install -y \
+        "${KMOD_PKG}-"*".fc${RELEASE}.${ARCH}"; \
+    # Force-build the kmod for exactly this kernel
+    akmods --force --kernels "${KERNEL}" --kmod "${KMOD_NAME}"; \
+    # Verify the .ko was actually produced
+    KO_PATH="/usr/lib/modules/${KERNEL}/extra/${KMOD_NAME}"; \
+    if ! find "${KO_PATH}" -name '*.ko*' -print -quit | grep -q .; then \
+        echo "ERROR: no .ko files found under ${KO_PATH}"; \
+        find /var/cache/akmods/"${KMOD_NAME}"/ -name '*.log' -print -exec cat {} \; 2>/dev/null || true; \
+        exit 1; \
+    fi; \
+    # Copy the built kmod RPMs to output dir
+    find /root/rpmbuild/RPMS/"${ARCH}"/ -name "kmod-${KMOD_NAME}*.rpm" \
+        -exec cp -v {} /var/cache/rpms/kmods/ \; 2>/dev/null || true; \
+    # Fallback: grab whatever akmods put in cache
+    find /var/cache/akmods/ -name "*.rpm" ! -name "*.src.rpm" \
+        -exec cp -v {} /var/cache/rpms/kmods/ \; 2>/dev/null || true; \
+    echo "Done. Built RPMs:"; \
+    find /var/cache/rpms/kmods/ -name '*.rpm'
+
