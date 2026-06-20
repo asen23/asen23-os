@@ -65,7 +65,6 @@ modules:
     install:
       packages:
         - klassy
-        - akmod-nct6687d
 
   # Akmods
   - from-file: local-akmods-modules.yml
