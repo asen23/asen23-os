@@ -7,4 +7,4 @@ modules:
   - type: containerfile
     snippets:
       - RUN find /tmp/rpms
-      - RUN dnf -y install /tmp/rpms/kmods/*nct6687d*.rpm
+      - RUN dnf -y install /tmp/rpms/*nct6687d*.rpm
