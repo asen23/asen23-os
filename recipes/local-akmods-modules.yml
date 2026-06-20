@@ -1,8 +1,4 @@
 modules:
-  - type: containerfile
-    containerfiles:
-      - akmod
-
   - type: copy
     from: akmod
     src: /var/cache/rpms/kmods/

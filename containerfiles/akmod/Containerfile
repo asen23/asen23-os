@@ -1,5 +1,3 @@
-FROM quay.io/fedora/fedora:FEDORA_VERSION_PLACEHOLDER as akmod
-
 ARG KMOD_PKG=akmod-nct6687d
 ARG KMOD_NAME=nct6687d
 
