@@ -1,6 +1,6 @@
 modules:
   - type: copy
-    from: ghcr.io/ublue-os/akmods-extra:KERNEL_VERSION
+    from: ghcr.io/ublue-os/akmods-extra:KERNEL_VERSION_PLACEHOLDER
     src: /rpms/
     dest: /tmp/rpms
 
