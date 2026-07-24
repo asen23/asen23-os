@@ -50,7 +50,7 @@ jobs:
           sed -i "s/KERNEL_VERSION_PLACEHOLDER/$kernel_version/g" ./containerfiles/akmod/Containerfile
           sed -i "s/FEDORA_VERSION_PLACEHOLDER/$fedora_version/g" ./recipes/recipe-bazzite.yml
       - name: Build Custom Image
-        uses: blue-build/github-action@24d146df25adc2cf579e918efe2d9bff6adea408 # v1.11
+        uses: blue-build/github-action@836161eb076426a451e6a0054f722b1153b8b3ad # v1.12
         with:
           recipe: ${{ matrix.recipe }}
           cosign_private_key: ${{ secrets.SIGNING_SECRET }}
