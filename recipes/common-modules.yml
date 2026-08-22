@@ -79,7 +79,7 @@ modules:
         - cloudflare-warp
 
   # Akmods
-  - from-file: local-akmods-modules.yml
+  # - from-file: local-akmods-modules.yml
 
   # Terra Cleanup
   - type: containerfile
