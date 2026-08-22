@@ -1,15 +1,20 @@
-# image will be published to ghcr.io/<user>/<name>
-name: bazzite
-# description will be included in the image's metadata
-description: Bazzite with my personal changes.
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v2.json
+version: 2
 
-alt-tags:
-  - stable
-  - latest
+metadata:
+  name: bazzite
+  description: Bazzite with my personal changes.
 
-# the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/bazzite
-image-version: stable
+  alt-tags:
+    - stable
+    - latest
+
+base:
+  image:
+    registry: "ghcr.io"
+    repository: "ublue-os/bazzite"
+    tag: "stable"
+    digest: "sha256:5d88ae9a6454ab3c13edf7b722d96d0e1affc44b19386d47803f6417b56dc05c"
 
 # stages:
 #   - name: akmod
@@ -19,13 +24,9 @@ image-version: stable
 #       containerfiles:
 #         - akmod
 
-# module configuration, executed in order
-# you can include multiple instances of the same module
 modules:
   - from-file: common-modules.yml
 
   - type: script
     scripts:
       - bazzite/modify-image-info.sh
-
-
