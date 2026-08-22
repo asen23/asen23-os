@@ -7,8 +7,12 @@
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["image-versions.yaml"],
-      "matchStrings": ["name: \\\"(?<name>[^\\\"\\\\\\s]+)\\\"\\s+image: \\\"(?<depName>[^\\\"\\\\\\s]+)\\\"\\s+tag: \\\"(?<currentValue>[^\\\"\\\\\\s]+)\\\"\\s+digest: \"(?<currentDigest>[^\\\"\\\\\\s]+)\\\""],
+      "managerFilePatterns": [
+        "recipes/recipe-bazzite.yaml"
+      ],
+      "matchStrings": [
+        "registry: \\\"(?<registryUrl>[^\\\"\\\\\\s]+)\\\"\\s+repository: \\\"(?<depName>[^\\\"\\\\\\s]+)\\\"\\s+tag: \\\"(?<currentValue>[^\\\"\\\\\\s]+)\\\"\\s+digest: \\\"(?<currentDigest>[^\\\"\\\\\\s]+)\\\""
+      ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "docker"
     }
