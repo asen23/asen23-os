@@ -54,18 +54,6 @@ modules:
         - coolercontrol
         - liquidctl
 
-  # Enable Terra for package that requires it
-  - type: containerfile
-    snippets:
-      - RUN sed -i 's@enabled=0@enabled=1@g' /etc/yum.repos.d/terra.repo
-      - RUN sed -i 's@enabled=0@enabled=1@g' /etc/yum.repos.d/terra-extras.repo
-
-  # Klassy
-  - type: dnf
-    install:
-      packages:
-        - klassy
-
   # Cloudflare Warp
   - type: dnf
     repos:
@@ -77,6 +65,18 @@ modules:
     install:
       packages:
         - cloudflare-warp
+
+  # Enable Terra for package that requires it
+  - type: containerfile
+    snippets:
+      - RUN sed -i 's@enabled=0@enabled=1@g' /etc/yum.repos.d/terra.repo
+      - RUN sed -i 's@enabled=0@enabled=1@g' /etc/yum.repos.d/terra-extras.repo
+
+  # Klassy
+  - type: dnf
+    install:
+      packages:
+        - klassy
 
   # Akmods
   # - from-file: local-akmods-modules.yml
