@@ -11,13 +11,13 @@ alt-tags:
 base-image: ghcr.io/ublue-os/bazzite
 image-version: stable
 
-stages:
-  - name: akmod
-    from: quay.io/fedora/fedora:FEDORA_VERSION_PLACEHOLDER
-    modules:
-    - type: containerfile
-      containerfiles:
-        - akmod
+# stages:
+#   - name: akmod
+#     from: quay.io/fedora/fedora:FEDORA_VERSION_PLACEHOLDER
+#     modules:
+#     - type: containerfile
+#       containerfiles:
+#         - akmod
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
