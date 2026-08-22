@@ -37,7 +37,7 @@ jobs:
       - name: Inspect image and extract label
         run: |
           KERNEL_VALUE=$(skopeo inspect docker://ghcr.io/ublue-os/bazzite:stable | jq -r '.Labels["ostree.linux"] | capture("(?<a>.*-ogc.*)\\.(?<b>fc(?<c>[0-9]+))")')
-          KERNEL_VERSION=$(echo $KERNEL_VALUE | jq -r '.a + "-" + .b')
+          KERNEL_VERSION=$(echo $KERNEL_VALUE | jq -r '(.a | sub("\\.0-"; "-")) + "-" + .b')
           FEDORA_VERSION=$(echo $KERNEL_VALUE | jq -r '.c')
           echo "kernel_version=$KERNEL_VERSION" >> $GITHUB_ENV
           echo "fedora_version=$FEDORA_VERSION" >> $GITHUB_ENV
