@@ -66,6 +66,18 @@ modules:
       packages:
         - klassy
 
+  # Cloudflare Warp
+  - type: dnf
+    repos:
+      cleanup: true
+      files:
+        - https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo
+      keys:
+        - https://pkg.cloudflareclient.com/pubkey.gpg
+    install:
+      packages:
+        - cloudflare-warp
+
   # Akmods
   - from-file: local-akmods-modules.yml
 
