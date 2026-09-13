@@ -88,15 +88,10 @@ modules:
       - RUN sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/terra-extras.repo
   # Misc
   - type: dnf
-    repos:
-      cleanup: true
-      copr:
-        - jackgreiner/wallpaper-engine-kde-plugin
     install:
       packages:
         - ptyxis
         - zsh
-        - wallpaper-engine-kde-plugin
 
   - type: systemd
     system:
