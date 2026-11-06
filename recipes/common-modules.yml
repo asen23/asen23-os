@@ -55,16 +55,16 @@ modules:
         - liquidctl
 
   # Cloudflare Warp
-  - type: dnf
-    repos:
-      cleanup: true
-      files:
-        - https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo
-      keys:
-        - https://pkg.cloudflareclient.com/pubkey.gpg
-    install:
-      packages:
-        - cloudflare-warp
+  # - type: dnf
+  #   repos:
+  #     cleanup: true
+  #     files:
+  #       - https://pkg.cloudflareclient.com/cloudflare-warp-ascii.repo
+  #     keys:
+  #       - https://pkg.cloudflareclient.com/pubkey.gpg
+  #   install:
+  #     packages:
+  #       - cloudflare-warp
 
   # Enable Terra for package that requires it
   - type: containerfile
